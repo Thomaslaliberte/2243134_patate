@@ -1,0 +1,19 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Notes",
+        "summary": "Permet de d'avoir accès a ses notes.",
+        "description": "Les note d'un utilisateur.",
+        "contact": {
+            "name": "assistance",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        }
+    },
+    "version": "1.0.0",
+    "servers": [
+        {
+            "url": "localhost:3000/api",
+            "description": "url de développement"
+        }
+    ]
+}
