@@ -46,7 +46,7 @@ Taches.creerUneTache = (req, id) => {
 Taches.trouverUneTache = (id) => {
     return new Promise((resolve, reject) => {
 
-        const requete = `SELECT titre, description, date_debut, date_echeance, complete FROM taches WHERE id = $1`;
+        const requete = `SELECT id, titre, description, date_debut, date_echeance, complete FROM taches WHERE id = $1`;
         const params = [id];
 
         sql.query(requete, params, (erreur, resultat) => {
@@ -98,7 +98,7 @@ Taches.verifierCle = (cle, id) => {
 Taches.trouverToutesLesTaches = (id) => {
     return new Promise((resolve, reject) => {
 
-        const requete = `SELECT titre, description, date_debut, date_echeance, complete FROM taches WHERE utilisateur_id = $1`;
+        const requete = `SELECT id, titre, description, date_debut, date_echeance, complete FROM taches WHERE utilisateur_id = $1`;
         const params = [id];
 
         sql.query(requete, params, (erreur, resultat) => {

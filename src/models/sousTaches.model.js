@@ -80,7 +80,7 @@ SousTaches.verifierUneSousTache = (req) => {
 SousTaches.supprimerUneSousTache = (req) => {
     return new Promise((resolve, reject) => {
         
-            let requete = `DELETE FROM sous_taches where id = $1`;
+            let requete = `DELETE FROM sous_taches where tache_id = $1`;
             let params = [req.params.id]
         
         
