@@ -243,10 +243,11 @@ exports.supprimerUneSousTache = (req, res) => {
                 Taches.verifierCle(req.headers.authorization.split(' ')[1], req.body.tache_id)
                     .then((cle) => {
                         if (cle != "") {
+                            console.log("h")
                             SousTaches.supprimerUneSousTache(req)
                                 // Si c'est un succès
                                 .then((tache) => {
-
+                                    console.log("f")
                                     res.send({ message: "La sous-tache " + [req.params.id] + " a été supprimer avec succès", sousTache: { id: req.params.id, tache: tache } })
                                 })
                                 // S'il y a eu une erreur au niveau de la requête, on retourne un erreur 500 car c'est du serveur que provient l'erreur.
