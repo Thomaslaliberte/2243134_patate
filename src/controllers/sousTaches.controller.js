@@ -157,6 +157,9 @@ exports.modifierStatusSousTache = (req, res) => {
     if (req.body.complete == null) {
         message += "complete\r\n";
     }
+    if (!req.body.tache_id) {
+        message += "id\r\n";
+    }
     if (!req.params.id) {
         message += "id\r\n";
     }
@@ -170,7 +173,7 @@ exports.modifierStatusSousTache = (req, res) => {
     SousTaches.verifierUneSousTache(req)
         .then((valeur) => {
             if (valeur != "") {
-                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.params.id)
+                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.body.tache_id)
                     .then((cle) => {
                         if (cle != "") {
                             SousTaches.modifierStatusSousTache(req)
