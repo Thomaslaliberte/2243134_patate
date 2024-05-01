@@ -82,7 +82,8 @@ Taches.verifierCle = (cle, id) => {
 
         const requete = `SELECT cle_api FROM taches INNER JOIN utilisateur on utilisateur_id = utilisateur.id WHERE cle_api = $1 and taches.id = $2`;
         const params = [cle,id];
-
+        console.log(cle)
+        console.log(id)
         sql.query(requete, params, (erreur, resultat) => {
 
             if (erreur) {
