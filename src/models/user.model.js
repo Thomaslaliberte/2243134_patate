@@ -92,7 +92,6 @@ Users.creationCle = (req) => {
                 reject(erreur);
             }
             // Sinon je retourne le résultat sans faire de validation, c'est possible que le résultat soit vide
-            console.log(erreur);
             resolve(myuuid);
         });
     });
