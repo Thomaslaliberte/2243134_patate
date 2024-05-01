@@ -224,11 +224,23 @@ exports.modifierStatusSousTache = (req, res) => {
 
 exports.supprimerUneSousTache = (req, res) => {
     // Teste si le paramètre id est présent et valide
-
+    if (!req.params.id) {
+        message += "id\r\n";
+    }
+    if (!req.body.tache_id) {
+        message += "tache_id\r\n";
+    }
+    if (message != "") {
+        res.status(400);
+        res.send({
+            champ_manquant: message
+        });
+        return;
+    }
     SousTaches.verifierUneSousTache(req)
         .then((valeur) => {
             if (valeur[0]) {
-                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.params.id)
+                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.body.tache_id)
                     .then((cle) => {
                         if (cle != "") {
                             SousTaches.supprimerUneSousTache(req)
