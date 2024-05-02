@@ -31,7 +31,8 @@ Taches.creerUneTache = (req, id) => {
     return new Promise((resolve, reject) => {
 
         const requete = `INSERT INTO taches (utilisateur_id, titre, description, date_debut, date_echeance, complete) VALUES ($1, $2, $3, $4, $5, $6)`;
-        const params = [id, req.body.titre, req.body.description, req.body.date_debut, req.body.date_echeance, req.body.complete];
+        let date = new Date().toJSON();
+        const params = [id, req.body.titre, req.body.description, date, req.body.date_echeance, req.body.complete];
         sql.query(requete, params, (erreur, resultat) => {
             if (erreur) {
                 // S'il y a une erreur, je la retourne avec reject()
@@ -114,8 +115,8 @@ Taches.trouverToutesLesTaches = (id) => {
 
 Taches.modifierUneTache = (req) => {
     return new Promise((resolve, reject) => {
-        let requete = `update taches set titre = $1, description = $2, date_debut = $3, date_echeance = $4, complete = $5 where id = $6`;
-        let params = [req.body.titre, req.body.description, req.body.date_debut, req.body.date_echeance, req.body.complete, req.params.id]
+        let requete = `update taches set titre = $1, description = $2, date_echeance = $4, complete = $5 where id = $6`;
+        let params = [req.body.titre, req.body.description, req.body.date_echeance, req.body.complete, req.params.id]
         
 
         sql.query(requete, params, (erreur, resultat) => {

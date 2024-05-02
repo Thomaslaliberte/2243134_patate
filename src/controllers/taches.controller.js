@@ -10,9 +10,6 @@ exports.creerUneTache = (req, res) => {
     if (!req.body.description) {
         message += "description\r\n";
     }
-    if (!req.body.date_debut) {
-        message += "date_debut\r\n";
-    }
     if (!req.body.date_echeance) {
         message += "date_echeance\r\n";
     }
@@ -201,9 +198,6 @@ exports.modifierUneTache = (req, res) => {
     }
     if (!req.body.description) {
         message += "description\r\n";
-    }
-    if (!req.body.date_debut) {
-        message += "date_debut\r\n";
     }
     if (!req.body.date_echeance) {
         message += "date_echeance\r\n";
