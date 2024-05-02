@@ -87,7 +87,7 @@ exports.nouvelleCle = (req, res) => {
                     .then(resultat => {
                             Users.creationCle(req)
                             .then((cle) => {
-                                res.send({ "cle_api ": cle })
+                                res.send({ "cle_api": cle })
                             })
                             .catch(err => {
                                 res.status(500)
