@@ -6,6 +6,8 @@ var path = require('path');
 var fs = require('fs')
 const app = express();
 const PORT = 3000;
+const cors = require('cors');
+app.use(cors());
 app.use(morgan('combined', {
     skip: function (req, res) { return res.statusCode != 500 },
   stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
