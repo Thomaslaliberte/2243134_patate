@@ -115,6 +115,7 @@ Taches.trouverToutesLesTaches = (id) => {
 
 Taches.modifierUneTache = (req) => {
     return new Promise((resolve, reject) => {
+        console.log(req.params.id)
         let requete = `update taches set titre = $1, description = $2, date_echeance = $4, complete = $5 where id = $6`;
         let params = [req.body.titre, req.body.description, req.body.date_echeance, req.body.complete, req.params.id]
         
