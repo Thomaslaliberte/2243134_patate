@@ -215,6 +215,7 @@ exports.modifierUneTache = (req, res) => {
         });
         return;
     }
+    console.log("eer")
     Taches.verifierUneTache(req.params.id)
         .then((valeur) => {
             if (valeur != "") {

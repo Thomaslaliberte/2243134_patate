@@ -15,6 +15,7 @@ router.get('/:id', (req, res) => {
     tacheControlleur.trouverUneTache(req, res);
 });
 router.put('/:id', (req, res) => {
+    console.log("ef")
     tacheControlleur.modifierUneTache(req, res);
 });
 router.put('/status/:id', (req, res) => {
