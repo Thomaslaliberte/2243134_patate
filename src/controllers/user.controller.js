@@ -26,7 +26,6 @@ exports.ajouterUnUser = (req, res) => {
         return;
     }
 
-    // Appel à la fonction trouverUnProfesseur dans le modèle
     Users.verifierUnUser(req)
         // Si c'est un succès
         .then((user) => {
@@ -35,10 +34,8 @@ exports.ajouterUnUser = (req, res) => {
                     // Si c'est un succès
                     .then((Nuser) => {
 
-                        // Sinon on retourne le premier objet du tableau de résultat car on ne devrait avoir qu'un professeur par id
                         res.send({ message: "L'utilisateur " + [req.body.prenom]+" " +[req.body.nom] + " a été ajouté avec succès", "cle_api": Nuser })
                     })
-                    // S'il y a eu une erreur au niveau de la requête, on retourne un erreur 500 car c'est du serveur que provient l'erreur.
                     .catch((erreur) => {
                         console.log('Erreur : ', erreur);
                         res.status(500)
@@ -55,7 +52,6 @@ exports.ajouterUnUser = (req, res) => {
             }
 
         })
-        // S'il y a eu une erreur au niveau de la requête, on retourne un erreur 500 car c'est du serveur que provient l'erreur.
         .catch((erreur) => {
             console.log('Erreur : ', erreur);
             res.status(500)
