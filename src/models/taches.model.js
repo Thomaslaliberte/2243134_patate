@@ -116,6 +116,7 @@ Taches.trouverToutesLesTaches = (id) => {
 Taches.modifierUneTache = (req) => {
     return new Promise((resolve, reject) => {
         console.log(req.params.id)
+        console.log(req.body.description)
         let requete = `update taches set titre = $1, description = $2, date_echeance = $4, complete = $5 where id = $6`;
         let params = [req.body.titre, req.body.description, req.body.date_echeance, req.body.complete, req.params.id]
         
@@ -126,7 +127,7 @@ Taches.modifierUneTache = (req) => {
                 reject(erreur);
             }
             // Sinon je retourne le résultat sans faire de validation, c'est possible que le résultat soit vide
-            resolve(resultat.rows);
+            resolve(resultat);
         });
     });
 };
