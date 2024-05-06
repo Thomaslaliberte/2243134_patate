@@ -3,7 +3,7 @@
     "info": {
         "title": "Notes",
         "summary": "Permet de d'avoir accès a ses notes.",
-        "description": "Les note d'un utilisateur.",
+        "description": "Les notes d'un utilisateur.",
         "contact": {
             "name": "assistance",
             "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -14,29 +14,52 @@
         {
             "url": "https://two243134-patate1.onrender.com/api/",
             "description": "url"
-            
         }
     ],
-    
     "paths": {
         "/users": {
-            "get": {
+            "post": {
                 "description": "Permet de créer un utilisateur",
                 "summary": "Retourne la cle d'api créé",
                 "tags": [
                     "Users"
                 ],
-                "parameters": [
-                    {
-                        "name": "nom",
-                        "in": "body",
-                        "description": "le nom du nouvel utilisateur",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "nom",
+                                    "prenom",
+                                    "courriel",
+                                    "mot_de_passe"
+                                ],
+                                "properties": {
+                                    "nom": {
+                                        "type": "string"
+                                    },
+                                    "prenom": {
+                                        "type": "string"
+                                    },
+                                    "courriel": {
+                                        "type": "courriel"
+                                    },
+                                    "mot_de_passe": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "nom": "Laliberté",
+                                "prenom": "Thomas",
+                                "courriel": "thomas.laliberte@icloud.com",
+                                "mot_de_passe": "1234"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Un message de réussite et la nouvelle cle d'api",
@@ -45,149 +68,21 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        
-                                               
-                                                    "message": {
-                                                        "type": "string",
-                                                        "example": "L'utilisateur Thomas Laliberte a été ajouté avec succès"
-                                                    },
-                                                    "cle_api": {
-                                                        "type": "string",
-                                                        "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
-                                                    }
-                                                
-                                            
-                                        
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "message informant que les pokemon sont introuvable",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "aucun pokemon trouvée"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "message informant une erreur de serveur",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
+                                            "example": "L'utilisateur Thomas Laliberte a été ajouté avec succès"
+                                        },
+                                        "cle_api": {
                                             "type": "string",
-                                            "example": "Erreur lors de la récupération des pokemon"
+                                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
                                         }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "description": "modifie un pokemon",
-                "summary": "modifie un pokemon",
-                "tags": [
-                    "Pokemons"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "params",
-                        "description": "l'id du nouveau pokemon",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "nom",
-                        "in": "body",
-                        "description": "le nom du nouveau pokemon",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "type_primaire",
-                        "in": "body",
-                        "description": "le nom du type primaire du nouveau pokemon",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "type_secondaire",
-                        "in": "body",
-                        "description": "le nom du type secondaire du nouveau pokemon",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "pv",
-                        "in": "body",
-                        "description": "le nombre de pv du nouveau pokemon",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "attaque",
-                        "in": "body",
-                        "description": "le nombre d'attaque' du nouveau pokemon",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "defense",
-                        "in": "body",
-                        "description": "le nombre de defense du nouveau pokemon",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "le pokemon modifier",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "pokemon": {
-                                            
-                                            "$ref": "#/components/schemas/pokemonModifier"
-                                        }
-                                        
                                     }
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "message informant qu'un champ est manquant",
+                        "description": "message informant que les informations entrées sont mauvaises",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -195,23 +90,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "[champ manquant], [champ manquant]..."
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "message informant que le pokemon est introuvable",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Pokemon introuvable avec l'id [id]"
+                                            "example": "le courriel est deja utilisé"
                                         }
                                     }
                                 }
@@ -227,7 +106,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Erreur lors de la récupération des pokemon"
+                                            "example": "echec lors de la vérification du courriel"
                                         }
                                     }
                                 }
@@ -235,44 +114,60 @@
                         }
                     }
                 }
-            },
-            "delete": {
-                "description": "supprime un pokemon",
-                "summary": "supprime un pokemon",
+            }
+        },
+        "/users/cle": {
+            "post": {
+                "description": "Permet de changer la cle d'api d'un utilisateur",
+                "summary": "Retourne la cle d'api créé",
                 "tags": [
-                    "Pokemons"
+                    "Users"
                 ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "params",
-                        "description": "l'id du nouveau pokemon",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "courriel",
+                                    "mot_de_passe"
+                                ],
+                                "properties": {
+                                    "courriel": {
+                                        "type": "courriel"
+                                    },
+                                    "mot_de_passe": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "courriel": "thomas.laliberte@icloud.com",
+                                "mot_de_passe": "1234"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
-                        "description": "le pokemon supprimer",
+                        "description": "La nouvelle cle d'api",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "pokemon": {
-                                            
-                                            "$ref": "#/components/schemas/pokemonModifier"
+                                        "cle_api": {
+                                            "type": "string",
+                                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
                                         }
-                                        
                                     }
                                 }
                             }
                         }
                     },
-                    "404": {
-                        "description": "message informant que le pokemon est introuvable",
+                    "400": {
+                        "description": "message informant que les informations entrées sont mauvaises",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -280,7 +175,14 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Pokemon introuvable avec l'id [id]"
+                                            "example": "champs manquant"
+                                        },
+                                        "champ_manquant": {
+                                            "type": "array",
+                                            "items":{
+                                                "type": "string"
+                                            },
+                                            "example":["mot_de_passe"]
                                         }
                                     }
                                 }
@@ -296,7 +198,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Erreur lors de la récupération des pokemon"
+                                            "example": "echec lors de la vérification du compte"
                                         }
                                     }
                                 }

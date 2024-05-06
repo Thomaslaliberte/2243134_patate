@@ -85,6 +85,7 @@ exports.nouvelleCle = (req, res) => {
             if (user[0] != null) {
                 bcrypt.compare(req.body.mot_de_passe, user[0].password)
                     .then(resultat => {
+                        console.log(resultat)
                             Users.creationCle(req)
                             .then((cle) => {
                                 res.send({ "cle_api": cle })
@@ -99,9 +100,9 @@ exports.nouvelleCle = (req, res) => {
 
                     })
                     .catch(err => {
-                        res.status(400)
+                        res.status(500)
                         res.send({
-                            message: "la combinaison n'existe pas"
+                            message: "échec lors de la creation de la cle"
                         });
                     })
             }
