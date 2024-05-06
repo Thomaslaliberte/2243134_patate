@@ -215,19 +215,15 @@ exports.modifierUneTache = (req, res) => {
         });
         return;
     }
-    console.log("eer")
     Taches.verifierUneTache(req.params.id)
         .then((valeur) => {
             if (valeur != "") {
-                console.log("e")
                 Taches.verifierCle(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
-                        console.log("f")
                         if (cle != "") {
                             Taches.modifierUneTache(req)
                                 // Si c'est un succès
                                 .then((tache) => {
-                                    console.log("e")
                                     res.send({ message: "La tache " + [req.params.id] + " a été modifier avec succès", tache: { id: req.params.id, titre: req.body.titre, description: req.body.desciption, date_debut: req.body.date_debut, date_echeance: req.body.date_echeance, complete: req.body.complete } })
                                 })
                                 // S'il y a eu une erreur au niveau de la requête, on retourne un erreur 500 car c'est du serveur que provient l'erreur.

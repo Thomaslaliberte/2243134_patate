@@ -85,7 +85,7 @@ exports.nouvelleCle = (req, res) => {
             if (user[0] != null) {
                 bcrypt.compare(req.body.mot_de_passe, user[0].password)
                     .then(resultat => {
-                        console.log(resultat)
+                        if(resultat){
                             Users.creationCle(req)
                             .then((cle) => {
                                 res.send({ "cle_api": cle })
@@ -96,7 +96,13 @@ exports.nouvelleCle = (req, res) => {
                                     message: "echec lors de la creation de la cle"
                                 });
                             });
-                        
+                        }
+                        else{
+                            res.status(400)
+                            res.send({
+                                message: "la combinaison n'existe pas"
+                            });
+                        }
 
                     })
                     .catch(err => {
@@ -107,9 +113,9 @@ exports.nouvelleCle = (req, res) => {
                     })
             }
             else {
-                res.status(400)
+                res.status(500)
                 res.send({
-                    message: "la combinaison n'existe pas"
+                    message: "echec de vérification de la combinaison"
                 });
             }
         })
