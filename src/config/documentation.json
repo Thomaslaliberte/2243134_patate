@@ -135,7 +135,7 @@
                                 ],
                                 "properties": {
                                     "courriel": {
-                                        "type": "courriel"
+                                        "type": "string"
                                     },
                                     "mot_de_passe": {
                                         "type": "string"
@@ -179,10 +179,12 @@
                                         },
                                         "champ_manquant": {
                                             "type": "array",
-                                            "items":{
+                                            "items": {
                                                 "type": "string"
                                             },
-                                            "example":["mot_de_passe"]
+                                            "example": [
+                                                "mot_de_passe"
+                                            ]
                                         }
                                     }
                                 }
@@ -207,6 +209,433 @@
                     }
                 }
             }
+        },
+        "/taches/liste": {
+            "post": {
+                "description": "Permet d'afficher toutes les taches d'un utilisateur",
+                "summary": "Retourne les taches de l'utilisateur",
+                "tags": [
+                    "Taches"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "complete"
+                                ],
+                                "properties": {
+                                    "complete": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "complete": false
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "La cle d'api",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Les taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/tache"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Message informant que les informations entrées sont mauvaises",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "champs manquant"
+                                        },
+                                        "champ_manquant": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "complete"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Message informant que l'utilisateur ne possede pas de taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Taches introuvables"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erreur lors de la récupération des taches"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/taches/:id": {
+            "get": {
+                "description": "Permet d'afficher les informations et les sous-taches d'une tache",
+                "summary": "Retourne les informations et les sous-taches d'une tache",
+                "tags": [
+                    "Taches"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "La cle d'api",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "param",
+                        "description": "L'id de la tache'",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La tache",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tache": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/tache"
+                                        },
+                                        "sousTache": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "tache_id": {
+                                                        "type": "integer",
+                                                        "example": 34
+                                                    },
+                                                    "titre": {
+                                                        "type": "string",
+                                                        "example": "exemple"
+                                                    },
+                                                    "complete": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Message informant que les informations entrées sont mauvaises",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "L'id du tache est obligatoire et doit être supérieur à 0"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Message informant que l'utilisateur ne possede pas cette taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La tache ne vien pas de cet utilisateur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Message informant que l'utilisateur ne possede pas de taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Taches introuvables avec l'id 1"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erreur lors de la récupération de la tache"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/taches": {
+            "post": {
+                "description": "Permet de créer une nouvelle tache",
+                "summary": "Retourne un message de status",
+                "tags": [
+                    "Taches"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "complete"
+                                ],
+                                "properties": {
+                                    "titre":{
+                                        "type":"string"
+                                    },
+                                    "description":{
+                                        "type":"string"
+                                    },
+                                    "date_echeance":{
+                                        "type":"date"
+                                    },
+                                    "complete": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "titre": "Manger",
+                                "description":"du poulet",
+                                "date_echeance":"2003-01-02",
+                                "complete": false
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "La cle d'api",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La tache",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "la tache Manger à été ajouter avec succès"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Message informant que les informations entrées sont mauvaises",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example":"champs manquant"
+                                        },
+                                        "champ_manquant": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "mot_de_passe"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Message informant que l'utilisateur ne possede pas cette taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La tache ne vien pas de cet utilisateur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Message informant que l'utilisateur ne possede pas de taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Taches introuvables avec l'id 1"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erreur lors de la récupération de la tache"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "tache": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 34
+                    },
+                    "titre": {
+                        "type": "string",
+                        "example": "exemple"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "exemple"
+                    },
+                    "date_debut": {
+                        "type": "date",
+                        "example": "2003-01-02T00:00:00.000Z"
+                    },
+                    "date_echeance": {
+                        "type": "date",
+                        "example": "2024-05-06T00:00:00.000Z"
+                    },
+                    "complete": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                }
+            }
+            
         }
     }
 }

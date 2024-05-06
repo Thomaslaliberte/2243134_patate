@@ -3,27 +3,28 @@ const SousTaches = require("../models/sousTaches.model.js");
 const { description, date_debut, date_echeance, complete } = require("../models/taches.model.js");
 
 exports.creerUneTache = (req, res) => {
-    var message = "";
+    var message = [];
     if (!req.body.titre) {
-        message += "titre\r\n";
+        message.push("titre");
     }
     if (!req.body.description) {
-        message += "description\r\n";
+        message.push("description");
     }
     if (!req.body.date_echeance) {
-        message += "date_echeance\r\n";
+        message.push("date_echeance");
     }
     if (req.body.complete == null) {
-        message += "complete\r\n";
+        message.push("complete");
     }
 
-    if (message != "") {
+    if (message[0] != null) {
         res.status(400);
         res.send({
+            erreur: "champs manquant",
             champ_manquant: message
         });
         return;
-    };
+    }
     Taches.chercherUtilisateur(req.headers.authorization.split(' ')[1])
         .then((resultat) => {
             Taches.creerUneTache(req, resultat[0].id)
@@ -88,7 +89,7 @@ exports.trouverUneTache = (req, res) => {
                                 console.log('Erreur : ', erreur);
                                 res.status(500)
                                 res.send({
-                                    message: "Erreur lors de la récupération de la  tache"
+                                    message: "Erreur lors de la récupération de la tache"
                                 });
                             });
                     }
@@ -119,17 +120,18 @@ exports.trouverUneTache = (req, res) => {
 };
 
 exports.trouverLesTaches = (req, res) => {
-    var message = "";
+    var message = [];
     if (req.body.complete == null) {
-        message += "complete\r\n";
+        message.push("complete");
     }
-    if (message != "") {
+    if (message[0] != null) {
         res.status(400);
         res.send({
+            erreur: "champs manquant",
             champ_manquant: message
         });
         return;
-    };
+    }
     Taches.chercherUtilisateur(req.headers.authorization.split(' ')[1])
         .then((resultat) => {
             if (!req.body.complete) {
@@ -192,25 +194,26 @@ exports.trouverLesTaches = (req, res) => {
 
 exports.modifierUneTache = (req, res) => {
     // Teste si le paramètre id est présent et valide
-    var message = "";
+    var message = [];
     if (!req.body.titre) {
-        message += "titre\r\n";
+        message.push("titre");
     }
     if (!req.body.description) {
-        message += "description\r\n";
+        message.push("description");
     }
     if (!req.body.date_echeance) {
-        message += "date_echeance\r\n";
+        message.push("date_echeance");
     }
     if (req.body.complete == null) {
-        message += "complete\r\n";
+        message.push("complete");
     }
     if (!req.params.id) {
-        message += "id\r\n";
+        message.push("id");
     }
-    if (message != "") {
+    if (message[0] != null) {
         res.status(400);
         res.send({
+            erreur: "champs manquant",
             champ_manquant: message
         });
         return;
@@ -268,16 +271,17 @@ exports.modifierUneTache = (req, res) => {
 
 exports.modifierStatusTache = (req, res) => {
     // Teste si le paramètre id est présent et valide
-    var message = "";
+    var message = [];
     if (req.body.complete == null) {
-        message += "complete\r\n";
+        message.push("complete");
     }
     if (!req.params.id) {
-        message += "id\r\n";
+        message.push("id");
     }
-    if (message != "") {
+    if (message[0] != null) {
         res.status(400);
         res.send({
+            erreur: "champs manquant",
             champ_manquant: message
         });
         return;
