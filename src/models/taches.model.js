@@ -118,7 +118,7 @@ Taches.modifierUneTache = (req) => {
         console.log(req.params.id)
         console.log(req.body.description)
         console.log( req.body.date_echeance)
-        let requete = `update taches set titre = $1, description = $2, date_echeance = $4, complete = $5 where id = $6`;
+        let requete = `update taches set titre = $1, description = $2, date_echeance = $3, complete = $4 where id = $5`;
         let params = [req.body.titre, req.body.description, req.body.date_echeance, req.body.complete, req.params.id]
         
 

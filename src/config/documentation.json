@@ -12,8 +12,299 @@
     "version": "1.0.0",
     "servers": [
         {
-            "url": "localhost:3000/api",
-            "description": "url de développement"
+            "url": "https://two243134-patate1.onrender.com/api/",
+            "description": "url"
+            
         }
-    ]
+    ],
+    
+    "paths": {
+        "/users": {
+            "get": {
+                "description": "Permet de créer un utilisateur",
+                "summary": "Retourne la cle d'api créé",
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "nom",
+                        "in": "body",
+                        "description": "le nom du nouvel utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Un message de réussite et la nouvelle cle d'api",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        
+                                               
+                                                    "message": {
+                                                        "type": "string",
+                                                        "example": "L'utilisateur Thomas Laliberte a été ajouté avec succès"
+                                                    },
+                                                    "cle_api": {
+                                                        "type": "string",
+                                                        "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
+                                                    }
+                                                
+                                            
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "message informant que les pokemon sont introuvable",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "aucun pokemon trouvée"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erreur lors de la récupération des pokemon"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "modifie un pokemon",
+                "summary": "modifie un pokemon",
+                "tags": [
+                    "Pokemons"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "params",
+                        "description": "l'id du nouveau pokemon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "nom",
+                        "in": "body",
+                        "description": "le nom du nouveau pokemon",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type_primaire",
+                        "in": "body",
+                        "description": "le nom du type primaire du nouveau pokemon",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type_secondaire",
+                        "in": "body",
+                        "description": "le nom du type secondaire du nouveau pokemon",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "pv",
+                        "in": "body",
+                        "description": "le nombre de pv du nouveau pokemon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "attaque",
+                        "in": "body",
+                        "description": "le nombre d'attaque' du nouveau pokemon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "defense",
+                        "in": "body",
+                        "description": "le nombre de defense du nouveau pokemon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "le pokemon modifier",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "pokemon": {
+                                            
+                                            "$ref": "#/components/schemas/pokemonModifier"
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "message informant qu'un champ est manquant",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "[champ manquant], [champ manquant]..."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "message informant que le pokemon est introuvable",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Pokemon introuvable avec l'id [id]"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erreur lors de la récupération des pokemon"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "supprime un pokemon",
+                "summary": "supprime un pokemon",
+                "tags": [
+                    "Pokemons"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "params",
+                        "description": "l'id du nouveau pokemon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "le pokemon supprimer",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "pokemon": {
+                                            
+                                            "$ref": "#/components/schemas/pokemonModifier"
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "message informant que le pokemon est introuvable",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Pokemon introuvable avec l'id [id]"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erreur lors de la récupération des pokemon"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

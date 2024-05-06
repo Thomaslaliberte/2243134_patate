@@ -15,7 +15,7 @@ app.use(morgan('combined', {
 
 const swaggerOptions = {
     customCss: '.swagger-ui .topbar { display: none }',
-    customSiteTitle: "notes"
+    customSiteTitle: "Notes"
 };
 const authentification = require('./src/middleware/authentification.middleware');
 
