@@ -1189,7 +1189,139 @@
                         }
                     },
                     "404": {
-                        "description": "Message informant que la tache n'existe pas",
+                        "description": "Message informant que la sous-tache n'existe pas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "la sous-tache 1 n'existe pas"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "echec lors de la verification de la sous-tache 1"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Permet de supprimer une sous tache",
+                "description": "Retourne un message de status",
+                "tags": [
+                    "SousTaches"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "La cle d'api",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "param",
+                        "description": "L'id de la tache'",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La tache",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La sous-tache 1 a été supprimer avec succès"
+                                        },
+                                        "sousTache": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "tache": {
+                                                    "type": "array"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Message informant que les informations entrées sont mauvaises",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "champs manquant"
+                                        },
+                                        "champ_manquant": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "id"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Message informant que l'utilisateur ne possede pas cette sous-taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La sous-tache ne vient pas de cet utilisateur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Message informant que la sous-tache n'existe pas",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1299,7 +1431,7 @@
                         }
                     },
                     "404": {
-                        "description": "Message informant que la tache n'existe pas",
+                        "description": "Message informant que la sous-tache n'existe pas",
                         "content": {
                             "application/json": {
                                 "schema": {
