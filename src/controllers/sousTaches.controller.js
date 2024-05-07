@@ -102,6 +102,8 @@ exports.modifierUneSousTache = (req, res) => {
     SousTaches.verifierUneSousTache(req)
         .then((valeur) => {
             if (valeur != "") {
+                console.log(req.headers.authorization.split(' ')[1]);
+                console.log(req.params.id);
                 Taches.verifierCle(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
                         if (cle != "") {

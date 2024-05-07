@@ -222,8 +222,6 @@ exports.modifierUneTache = (req, res) => {
     Taches.verifierUneTache(req.params.id)
         .then((valeur) => {
             if (valeur != "") {
-                console.log(req.headers.authorization.split(' ')[1]);
-                console.log(req.params.id);
                 Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
                         if (cle != "") {
