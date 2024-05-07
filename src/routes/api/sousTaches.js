@@ -4,16 +4,10 @@ const router = express.Router();
 const sousTacheController = require('../../controllers/sousTaches.controller');
 
 
-router.get('/liste', (req, res) => {
-    sousTacheController.trouverLesSousTaches(req, res)
-});
-
 router.post('/', (req, res) => {
     sousTacheController.creerUneSousTache(req, res);
 });
-router.get('/:id', (req, res) => {
-    sousTacheController.trouverUneSousTache(req, res);
-});
+
 router.put('/:id', (req, res) => {
     sousTacheController.modifierUneSousTache(req, res);
 });

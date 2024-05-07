@@ -96,7 +96,7 @@ exports.trouverUneTache = (req, res) => {
                     else {
                         res.status(403)
                         res.send({
-                            message: "La tache ne vien pas de cet utilisateur"
+                            message: "La tache ne vient pas de cet utilisateur"
                         });
                     }
                 })
@@ -218,16 +218,17 @@ exports.modifierUneTache = (req, res) => {
         });
         return;
     }
+    
     Taches.verifierUneTache(req.params.id)
         .then((valeur) => {
             if (valeur != "") {
-                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.params.id)
+                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
                         if (cle != "") {
                             Taches.modifierUneTache(req)
                                 // Si c'est un succès
                                 .then((tache) => {
-                                    res.send({ message: "La tache " + [req.params.id] + " a été modifier avec succès", tache: { id: req.params.id, titre: req.body.titre, description: req.body.desciption, date_debut: req.body.date_debut, date_echeance: req.body.date_echeance, complete: req.body.complete } })
+                                    res.send({ message: "La tache " + [req.params.id] + " a été modifier avec succès", tache: { id: req.params.id, titre: req.body.titre, description: req.body.description, date_debut: req.body.date_debut, date_echeance: req.body.date_echeance, complete: req.body.complete } })
                                 })
                                 // S'il y a eu une erreur au niveau de la requête, on retourne un erreur 500 car c'est du serveur que provient l'erreur.
                                 .catch((erreur) => {
@@ -241,7 +242,7 @@ exports.modifierUneTache = (req, res) => {
                         else {
                             res.status(403)
                             res.send({
-                                message: "La tache ne vien pas de cet utilisateur"
+                                message: "La tache ne vient pas de cet utilisateur"
                             });
                         }
                     })
@@ -289,7 +290,7 @@ exports.modifierStatusTache = (req, res) => {
     Taches.verifierUneTache(req.params.id)
         .then((valeur) => {
             if (valeur != "") {
-                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.params.id)
+                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
                         if (cle != "") {
                             Taches.modifierStatusTache(req)
@@ -310,7 +311,7 @@ exports.modifierStatusTache = (req, res) => {
                         else {
                             res.status(403)
                             res.send({
-                                message: "La tache ne vien pas de cet utilisateur"
+                                message: "La tache ne vient pas de cet utilisateur"
                             });
                         }
                     })
@@ -347,7 +348,7 @@ exports.supprimerUneTache = (req, res) => {
     Taches.verifierUneTache(req.params.id)
         .then((valeur) => {
             if (valeur[0]) {
-                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.params.id)
+                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
                         if (cle != "") {
                             SousTaches.supprimerUneSousTache(req)
@@ -381,7 +382,7 @@ exports.supprimerUneTache = (req, res) => {
                         else {
                             res.status(403)
                             res.send({
-                                message: "La tache ne vien pas de cet utilisateur"
+                                message: "La tache ne vient pas de cet utilisateur"
                             });
                         }
                     })

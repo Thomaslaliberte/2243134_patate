@@ -3,24 +3,25 @@ const SousTaches = require("../models/sousTaches.model.js");
 const { description, date_debut, date_echeance, complete } = require("../models/sousTaches.model.js");
 
 exports.creerUneSousTache = (req, res) => {
-    var message = "";
+    var message = [];
     if (!req.body.tache_id) {
-        message += "tache_id\r\n";
+        message.push("tache_id");
     }
     if (!req.body.titre) {
-        message += "titre\r\n";
+        message.push("titre");
     }
     if (req.body.complete == null) {
-        message += "complete\r\n";
+        message.push("complete");
     }
 
-    if (message != "") {
+    if (message[0] != null) {
         res.status(400);
         res.send({
+            erreur: "champs manquant",
             champ_manquant: message
         });
         return;
-    };
+    }
     Taches.verifierUneTache(req.body.tache_id)
         .then((valeur) => {
             if (valeur != "") {
@@ -46,7 +47,7 @@ exports.creerUneSousTache = (req, res) => {
                         else {
                             res.status(403)
                             res.send({
-                                message: "La tache ne vien pas de cet utilisateur"
+                                message: "La tache ne vient pas de cet utilisateur"
                             });
                         }
                     })
@@ -80,19 +81,20 @@ exports.creerUneSousTache = (req, res) => {
 
 exports.modifierUneSousTache = (req, res) => {
     // Teste si le paramètre id est présent et valide
-    var message = "";
+    var message = [];
     if (!req.body.titre) {
-        message += "titre\r\n";
+        message.push("titre");
     }
     if (req.body.complete == null) {
-        message += "complete\r\n";
+        message.push("complete");
     }
     if (!req.params.id) {
-        message += "id\r\n";
+        message.push("id");
     }
-    if (message != "") {
+    if (message[0] != null) {
         res.status(400);
         res.send({
+            erreur: "champs manquant",
             champ_manquant: message
         });
         return;
@@ -121,7 +123,7 @@ exports.modifierUneSousTache = (req, res) => {
                         else {
                             res.status(403)
                             res.send({
-                                message: "La tache ne vien pas de cet utilisateur"
+                                message: "La tache ne vient pas de cet utilisateur"
                             });
                         }
                     })
@@ -153,19 +155,20 @@ exports.modifierUneSousTache = (req, res) => {
 
 exports.modifierStatusSousTache = (req, res) => {
     // Teste si le paramètre id est présent et valide
-    var message = "";
+    var message = [];
     if (req.body.complete == null) {
-        message += "complete\r\n";
+        message.push("complete");
     }
     if (!req.body.tache_id) {
-        message += "id\r\n";
+        message.push("tache_id");
     }
     if (!req.params.id) {
-        message += "id\r\n";
+        message.push("id");
     }
-    if (message != "") {
+    if (message[0] != null) {
         res.status(400);
         res.send({
+            erreur: "champs manquant",
             champ_manquant: message
         });
         return;
@@ -194,7 +197,7 @@ exports.modifierStatusSousTache = (req, res) => {
                         else {
                             res.status(403)
                             res.send({
-                                message: "La tache ne vien pas de cet utilisateur"
+                                message: "La tache ne vient pas de cet utilisateur"
                             });
                         }
                     })
@@ -227,16 +230,17 @@ exports.modifierStatusSousTache = (req, res) => {
 
 exports.supprimerUneSousTache = (req, res) => {
     // Teste si le paramètre id est présent et valide
-    let message = "";
+    let message = [];
     if (!req.params.id) {
-        message += "id\r\n";
+        message.push("id");
     }
     if (!req.body.tache_id) {
-        message += "tache_id\r\n";
+        message.push("tache_id");
     }
-    if (message != "") {
+    if (message[0] != null) {
         res.status(400);
         res.send({
+            erreur: "champs manquant",
             champ_manquant: message
         });
         return;
@@ -264,7 +268,7 @@ exports.supprimerUneSousTache = (req, res) => {
                         else {
                             res.status(403)
                             res.send({
-                                message: "La tache ne vien pas de cet utilisateur"
+                                message: "La tache ne vient pas de cet utilisateur"
                             });
                         }
                     })

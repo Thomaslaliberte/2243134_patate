@@ -95,6 +95,23 @@ Taches.verifierCle = (cle, id) => {
     });
 };
 
+Taches.verifierCleSousTache = (cle, id) => {
+    return new Promise((resolve, reject) => {
+
+        const requete = `SELECT cle_api FROM sous_taches INNER JOIN taches on tache_id = taches.id INNER JOIN utilisateur on utilisateur_id = utilisateur.id WHERE cle_api = $1 and sous_taches.id = $2`;
+        const params = [cle,id];
+        sql.query(requete, params, (erreur, resultat) => {
+
+            if (erreur) {
+                // S'il y a une erreur, je la retourne avec reject()
+                reject(erreur);
+            }
+            // Sinon je retourne le résultat sans faire de validation, c'est possible que le résultat soit vide
+            resolve(resultat.rows);
+        });
+    });
+};
+
 Taches.trouverToutesLesTaches = (id) => {
     return new Promise((resolve, reject) => {
 

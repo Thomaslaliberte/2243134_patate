@@ -417,7 +417,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "La tache ne vien pas de cet utilisateur"
+                                            "example": "La tache ne vient pas de cet utilisateur"
                                         }
                                     }
                                 }
@@ -425,7 +425,7 @@
                         }
                     },
                     "404": {
-                        "description": "Message informant que l'utilisateur ne possede pas de taches",
+                        "description": "Message informant que la tache n'existe pas",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -449,7 +449,238 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Erreur lors de la récupération de la tache"
+                                            "example": "echec lors de la verification de la cle d'api"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Permet de modifier une tache",
+                "summary": "Retourne les informations de la tache modifiée",
+                "tags": [
+                    "Taches"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "La cle d'api",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "param",
+                        "description": "L'id de la tache'",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La tache",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La tache 1 a été modifier avec succès"
+                                        },
+                                        "tache": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/tacheModif"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Message informant que les informations entrées sont mauvaises",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "erreur": {
+                                            "type": "string",
+                                            "example": "champs manquant"
+                                        },
+                                        "champ_manquant": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "complete"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Message informant que l'utilisateur ne possede pas cette taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La tache ne vient pas de cet utilisateur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Message informant que la tache n'existe pas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "la tache 1 n'existe pas"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "echec lors de la verification de la cle d'api"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Permet de supprimer une tache",
+                "summary": "Retourne la tache supprimée",
+                "tags": [
+                    "Taches"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "La cle d'api",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "param",
+                        "description": "L'id de la tache'",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La tache",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La tache 1 a été supprimer avec succès"
+                                        },
+                                        "tache": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "tache": {
+                                                    "type":"array"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Message informant que l'utilisateur ne possede pas cette taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La tache ne vient pas de cet utilisateur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Message informant que la tache n'existe pas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "la tache 1 n'existe pas"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "echec lors de la verification de la tache 1"
                                         }
                                     }
                                 }
@@ -476,14 +707,14 @@
                                     "complete"
                                 ],
                                 "properties": {
-                                    "titre":{
-                                        "type":"string"
+                                    "titre": {
+                                        "type": "string"
                                     },
-                                    "description":{
-                                        "type":"string"
+                                    "description": {
+                                        "type": "string"
                                     },
-                                    "date_echeance":{
-                                        "type":"date"
+                                    "date_echeance": {
+                                        "type": "date"
                                     },
                                     "complete": {
                                         "type": "boolean"
@@ -492,8 +723,8 @@
                             },
                             "example": {
                                 "titre": "Manger",
-                                "description":"du poulet",
-                                "date_echeance":"2003-01-02",
+                                "description": "du poulet",
+                                "date_echeance": "2003-01-02",
                                 "complete": false
                             }
                         }
@@ -535,9 +766,9 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "message": {
+                                        "erreur": {
                                             "type": "string",
-                                            "example":"champs manquant"
+                                            "example": "champs manquant"
                                         },
                                         "champ_manquant": {
                                             "type": "array",
@@ -545,7 +776,113 @@
                                                 "type": "string"
                                             },
                                             "example": [
-                                                "mot_de_passe"
+                                                "complete"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erreur lors de la creation de la tache"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "taches/status/:id": {
+            "get": {
+                "description": "Permet de modifier le status d'une tache",
+                "summary": "Retourne les modifications apporté à la tache",
+                "tags": [
+                    "Taches"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "La cle d'api",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "param",
+                        "description": "L'id de la tache'",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La tache",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Le tache 1 a été modifier avec succès"
+                                        },
+                                        "sousTache": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "complete": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Message informant que les informations entrées sont mauvaises",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "erreur": {
+                                            "type": "string",
+                                            "example": "champs manquant"
+                                        },
+                                        "champ_manquant": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "complete"
                                             ]
                                         }
                                     }
@@ -562,7 +899,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "La tache ne vien pas de cet utilisateur"
+                                            "example": "La tache ne vient pas de cet utilisateur"
                                         }
                                     }
                                 }
@@ -570,7 +907,285 @@
                         }
                     },
                     "404": {
-                        "description": "Message informant que l'utilisateur ne possede pas de taches",
+                        "description": "Message informant que la tache n'existe pas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "la tache 1 n'existe pas"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "echec lors de la verification de la cle d'api"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "sousTache": {
+            "post": {
+                "description": "Permet de créer une sous-tache",
+                "summary": "Retourne un message de status",
+                "tags": [
+                    "SousTaches"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "La cle d'api",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "tache_id","titre", "complete"
+                                ],
+                                "properties": {
+                                    "tache_id": {
+                                        "type": "integer"
+                                    },
+                                    "titre": {
+                                        "type": "string"
+                                    },
+                                    "complete": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "tache_id":1,
+                                "titre": "Manger",
+                                "complete": false
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "La tache",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "la sous-tache Manger à été ajouter avec succès"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Message informant que les informations entrées sont mauvaises",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "erreur": {
+                                            "type": "string",
+                                            "example": "champs manquant"
+                                        },
+                                        "champ_manquant": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "complete"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Message informant que l'utilisateur ne possede pas cette taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La tache ne vient pas de cet utilisateur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Message informant que la tache n'existe pas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "la tache 1 n'existe pas"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "echec lors de la verification de la cle d'api"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/sousTaches/:id": {
+            "put": {
+                "description": "Permet de modifier une sous tache",
+                "summary": "Retourne les informations et les sous-taches d'une tache",
+                "tags": [
+                    "Taches"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "La cle d'api",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "param",
+                        "description": "L'id de la tache'",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La tache",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tache": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/tache"
+                                        },
+                                        "sousTache": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "tache_id": {
+                                                        "type": "integer",
+                                                        "example": 34
+                                                    },
+                                                    "titre": {
+                                                        "type": "string",
+                                                        "example": "exemple"
+                                                    },
+                                                    "complete": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Message informant que les informations entrées sont mauvaises",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "L'id du tache est obligatoire et doit être supérieur à 0"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Message informant que l'utilisateur ne possede pas cette taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La tache ne vient pas de cet utilisateur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Message informant que la tache n'existe pas",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -594,7 +1209,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Erreur lors de la récupération de la tache"
+                                            "example": "echec lors de la verification de la cle d'api"
                                         }
                                     }
                                 }
@@ -634,8 +1249,31 @@
                         "example": false
                     }
                 }
+            },
+            "tacheModif": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 34
+                    },
+                    "titre": {
+                        "type": "string",
+                        "example": "exemple"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "exemple"
+                    },
+                    "date_echeance": {
+                        "type": "date",
+                        "example": "2024-05-06T00:00:00.000Z"
+                    },
+                    "complete": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                }
             }
-            
         }
     }
 }
