@@ -172,7 +172,7 @@ exports.modifierStatusSousTache = (req, res) => {
     SousTaches.verifierUneSousTache(req)
         .then((valeur) => {
             if (valeur != "") {
-                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.body.tache_id)
+                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
                         if (cle != "") {
                             SousTaches.modifierStatusSousTache(req)
