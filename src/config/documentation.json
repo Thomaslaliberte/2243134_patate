@@ -19,8 +19,8 @@
     "paths": {
         "/users": {
             "post": {
-                "description": "Permet de créer un utilisateur",
-                "summary": "Retourne la cle d'api créé",
+                "summary": "Permet de créer un utilisateur",
+                "description": "Retourne la cle d'api créé",
                 "tags": [
                     "Users"
                 ],
@@ -118,8 +118,8 @@
         },
         "/users/cle": {
             "post": {
-                "description": "Permet de changer la cle d'api d'un utilisateur",
-                "summary": "Retourne la cle d'api créé",
+                "summary": "Permet de changer la cle d'api d'un utilisateur",
+                "description": "Retourne la cle d'api créé",
                 "tags": [
                     "Users"
                 ],
@@ -212,8 +212,8 @@
         },
         "/taches/liste": {
             "post": {
-                "description": "Permet d'afficher toutes les taches d'un utilisateur",
-                "summary": "Retourne les taches de l'utilisateur",
+                "summary": "Permet d'afficher toutes les taches d'un utilisateur",
+                "description": "Retourne les taches de l'utilisateur",
                 "tags": [
                     "Taches"
                 ],
@@ -324,8 +324,8 @@
         },
         "/taches/:id": {
             "get": {
-                "description": "Permet d'afficher les informations et les sous-taches d'une tache",
-                "summary": "Retourne les informations et les sous-taches d'une tache",
+                "summary": "Permet d'afficher les informations et les sous-taches d'une tache",
+                "description": "Retourne les informations et les sous-taches d'une tache",
                 "tags": [
                     "Taches"
                 ],
@@ -459,8 +459,8 @@
                 }
             },
             "put": {
-                "description": "Permet de modifier une tache",
-                "summary": "Retourne les informations de la tache modifiée",
+                "summary": "Permet de modifier une tache",
+                "description": "Retourne les informations de la tache modifiée",
                 "tags": [
                     "Taches"
                 ],
@@ -583,8 +583,8 @@
                 }
             },
             "delete": {
-                "description": "Permet de supprimer une tache",
-                "summary": "Retourne la tache supprimée",
+                "summary": "Permet de supprimer une tache",
+                "description": "Retourne la tache supprimée",
                 "tags": [
                     "Taches"
                 ],
@@ -630,7 +630,7 @@
                                                     "example": 1
                                                 },
                                                 "tache": {
-                                                    "type":"array"
+                                                    "type": "array"
                                                 }
                                             }
                                         }
@@ -692,8 +692,8 @@
         },
         "/taches": {
             "post": {
-                "description": "Permet de créer une nouvelle tache",
-                "summary": "Retourne un message de status",
+                "summary": "Permet de créer une nouvelle tache",
+                "description": "Retourne un message de status",
                 "tags": [
                     "Taches"
                 ],
@@ -805,8 +805,8 @@
         },
         "taches/status/:id": {
             "get": {
-                "description": "Permet de modifier le status d'une tache",
-                "summary": "Retourne les modifications apporté à la tache",
+                "summary": "Permet de modifier le status d'une tache",
+                "description": "Retourne les modifications apporté à la tache",
                 "tags": [
                     "Taches"
                 ],
@@ -943,8 +943,8 @@
         },
         "sousTache": {
             "post": {
-                "description": "Permet de créer une sous-tache",
-                "summary": "Retourne un message de status",
+                "summary": "Permet de créer une sous-tache",
+                "description": "Retourne un message de status",
                 "tags": [
                     "SousTaches"
                 ],
@@ -967,7 +967,9 @@
                             "schema": {
                                 "type": "object",
                                 "required": [
-                                    "tache_id","titre", "complete"
+                                    "tache_id",
+                                    "titre",
+                                    "complete"
                                 ],
                                 "properties": {
                                     "tache_id": {
@@ -982,7 +984,7 @@
                                 }
                             },
                             "example": {
-                                "tache_id":1,
+                                "tache_id": 1,
                                 "titre": "Manger",
                                 "complete": false
                             }
@@ -1084,10 +1086,10 @@
         },
         "/sousTaches/:id": {
             "put": {
-                "description": "Permet de modifier une sous tache",
-                "summary": "Retourne les informations et les sous-taches d'une tache",
+                "summary": "Permet de modifier une sous tache",
+                "description": "Retourne les informations de la sous-tache",
                 "tags": [
-                    "Taches"
+                    "SousTaches"
                 ],
                 "parameters": [
                     {
@@ -1119,31 +1121,24 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "tache": {
-                                            "type": "object",
-                                            "$ref": "#/components/schemas/tache"
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La sous-tache 1 a été modifier avec succès"
                                         },
                                         "sousTache": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "tache_id": {
-                                                        "type": "integer",
-                                                        "example": 34
-                                                    },
-                                                    "titre": {
-                                                        "type": "string",
-                                                        "example": "exemple"
-                                                    },
-                                                    "complete": {
-                                                        "type": "boolean",
-                                                        "example": true
-                                                    }
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "titre":{
+                                                    "type":"string",
+                                                    "example":"Manger"
+                                                },
+                                                "complete": {
+                                                    "type": "boolean",
+                                                    "example": true
                                                 }
                                             }
                                         }
@@ -1161,7 +1156,16 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "L'id du tache est obligatoire et doit être supérieur à 0"
+                                            "example": "champs manquant"
+                                        },
+                                        "champ_manquant": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "complete"
+                                            ]
                                         }
                                     }
                                 }
@@ -1169,7 +1173,7 @@
                         }
                     },
                     "403": {
-                        "description": "Message informant que l'utilisateur ne possede pas cette taches",
+                        "description": "Message informant que l'utilisateur ne possede pas cette sous-taches",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1177,7 +1181,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "La tache ne vient pas de cet utilisateur"
+                                            "example": "La sous-tache ne vient pas de cet utilisateur"
                                         }
                                     }
                                 }
@@ -1193,7 +1197,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Taches introuvables avec l'id 1"
+                                            "example": "la sous-tache 1 n'existe pas"
                                         }
                                     }
                                 }
@@ -1209,7 +1213,117 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "echec lors de la verification de la cle d'api"
+                                            "example": "echec lors de la verification de la sous-tache 1"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/sousTaches/status/:id": {
+            "put": {
+                "summary": "Permet de modifier le status d'une sous tache",
+                "description": "Retourne les informations de la sous-tache",
+                "tags": [
+                    "SousTaches"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "La cle d'api",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "cle_api 8a01ef9b-9b7d-42c8-9c1a-405087c5b0da"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "param",
+                        "description": "L'id de la tache'",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La tache",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La sous-tache 1 a été modifier avec succès"
+                                        },
+                                        "sousTache": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "complete": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Message informant que l'utilisateur ne possede pas cette sous-taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La sous-tache ne vient pas de cet utilisateur"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Message informant que la tache n'existe pas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "la sous-tache 1 n'existe pas"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Message informant une erreur de serveur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "echec lors de la verification de la sous-tache 1"
                                         }
                                     }
                                 }

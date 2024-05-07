@@ -122,7 +122,7 @@ exports.modifierUneSousTache = (req, res) => {
                         else {
                             res.status(403)
                             res.send({
-                                message: "La tache ne vient pas de cet utilisateur"
+                                message: "La sous-tache ne vient pas de cet utilisateur"
                             });
                         }
                     })
@@ -193,7 +193,7 @@ exports.modifierStatusSousTache = (req, res) => {
                         else {
                             res.status(403)
                             res.send({
-                                message: "La tache ne vient pas de cet utilisateur"
+                                message: "La sous-tache ne vient pas de cet utilisateur"
                             });
                         }
                     })
@@ -230,9 +230,6 @@ exports.supprimerUneSousTache = (req, res) => {
     if (!req.params.id) {
         message.push("id");
     }
-    if (!req.body.tache_id) {
-        message.push("tache_id");
-    }
     if (message[0] != null) {
         res.status(400);
         res.send({
@@ -264,7 +261,7 @@ exports.supprimerUneSousTache = (req, res) => {
                         else {
                             res.status(403)
                             res.send({
-                                message: "La tache ne vient pas de cet utilisateur"
+                                message: "La sous-tache ne vient pas de cet utilisateur"
                             });
                         }
                     })
