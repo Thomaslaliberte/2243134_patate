@@ -222,7 +222,7 @@ exports.modifierUneTache = (req, res) => {
     Taches.verifierUneTache(req.params.id)
         .then((valeur) => {
             if (valeur != "") {
-                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.params.id)
+                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
                         if (cle != "") {
                             Taches.modifierUneTache(req)
@@ -290,7 +290,7 @@ exports.modifierStatusTache = (req, res) => {
     Taches.verifierUneTache(req.params.id)
         .then((valeur) => {
             if (valeur != "") {
-                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.params.id)
+                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
                         if (cle != "") {
                             Taches.modifierStatusTache(req)
@@ -348,7 +348,7 @@ exports.supprimerUneTache = (req, res) => {
     Taches.verifierUneTache(req.params.id)
         .then((valeur) => {
             if (valeur[0]) {
-                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.params.id)
+                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
                         if (cle != "") {
                             SousTaches.supprimerUneSousTache(req)

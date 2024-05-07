@@ -104,7 +104,7 @@ exports.modifierUneSousTache = (req, res) => {
             if (valeur != "") {
                 console.log(req.headers.authorization.split(' ')[1]);
                 console.log(req.params.id);
-                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.params.id)
+                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
                         if (cle != "") {
                             SousTaches.modifierUneSousTache(req)
@@ -178,7 +178,7 @@ exports.modifierStatusSousTache = (req, res) => {
     SousTaches.verifierUneSousTache(req)
         .then((valeur) => {
             if (valeur != "") {
-                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.body.tache_id)
+                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.body.tache_id)
                     .then((cle) => {
                         if (cle != "") {
                             SousTaches.modifierStatusSousTache(req)
@@ -250,7 +250,7 @@ exports.supprimerUneSousTache = (req, res) => {
     SousTaches.verifierUneSousTache(req)
         .then((valeur) => {
             if (valeur[0]) {
-                Taches.verifierCle(req.headers.authorization.split(' ')[1], req.body.tache_id)
+                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.body.tache_id)
                     .then((cle) => {
                         if (cle != "") {
                             SousTaches.supprimerUneSousTache(req)
