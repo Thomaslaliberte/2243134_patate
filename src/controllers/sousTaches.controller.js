@@ -88,9 +88,6 @@ exports.modifierUneSousTache = (req, res) => {
     if (req.body.complete == null) {
         message.push("complete");
     }
-    if (!req.params.id) {
-        message.push("id");
-    }
     if (message[0] != null) {
         res.status(400);
         res.send({
@@ -160,9 +157,6 @@ exports.modifierStatusSousTache = (req, res) => {
     var message = [];
     if (req.body.complete == null) {
         message.push("complete");
-    }
-    if (!req.body.tache_id) {
-        message.push("tache_id");
     }
     if (!req.params.id) {
         message.push("id");
