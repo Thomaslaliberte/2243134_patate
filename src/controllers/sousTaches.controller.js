@@ -244,7 +244,7 @@ exports.supprimerUneSousTache = (req, res) => {
     SousTaches.verifierUneSousTache(req)
         .then((valeur) => {
             if (valeur[0]) {
-                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.body.tache_id)
+                Taches.verifierCleSousTache(req.headers.authorization.split(' ')[1], req.params.id)
                     .then((cle) => {
                         if (cle != "") {
                             SousTaches.supprimerUneSousTache(req)
